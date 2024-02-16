@@ -28,7 +28,7 @@ return new class extends Migration
             DB::table('films')->where('id', $film->id)->update(['rating' => $randomRating]);
         }
     }
-
+  
     /**
      * Reverse the migrations.
      *

@@ -20,7 +20,8 @@
             max-width: 600px;
             margin: auto;
         }
-        .list-unstyled{
+
+        .list-unstyled {
             text-align: center;
         }
     </style>
@@ -73,6 +74,19 @@
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
+    <form action="{{ route('actorsByDecade') }}" method="get" class="mt-4">
+        <div class="form-group">
+            <label for="year">Buscar actores por año:</label>
+            <select class="form-control" id="year" name="year">
+                <option value="1980">1980</option>
+                <option value="1990">1990</option>
+                <option value="2000">2000</option>
+                <option value="2010">2010</option>
+                <option value="2020">2020</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar Actores</button>
+    </form>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
