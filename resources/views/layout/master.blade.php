@@ -69,11 +69,13 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/filmout/films">List</a></li>
+                <li><a href="/filmout/films">List Films</a></li>
                 <li><a href="/filmout/oldFilms">Old Films</a></li>
                 <li><a href="/filmout/newFilms">New Films</a></li>
-                <li><a href="/filmout/countFilms">Count</a></li>
+                <li><a href="/filmout/countFilms">Count Films</a></li>
                 <li><a href="/filmout/sortFilms">Sorted Films</a></li>
+                <li><a href="/actorout/actors">List Actors</a></li>
+                <li><a href="/actorout/countActors">Count Actors</a></li>
                 <li><img src="{{asset('img/cara.png')}}" alt="Error al cargar la imagen" srcset=""></li>
                 <!-- Add more navigation links as needed -->
             </ul>
