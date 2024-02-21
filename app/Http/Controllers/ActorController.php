@@ -64,7 +64,8 @@ class ActorController extends Controller
     public function readActors()
     {
         // Utilizar el Query Builder para obtener solo las columnas deseadas de la tabla actors
-        $actors = DB::table('actors')->select('name', 'surname', 'birthdate', 'country', 'img_url')->get();
+        //$actors = DB::table('actors')->select('name', 'surname', 'birthdate', 'country', 'img_url')->get();
+        $actors = Actor::all();
 
         // Convertir los resultados a un array para que sean más fáciles de manejar en la vista
         $actorsArray = json_decode(json_encode($actors), true);
@@ -75,8 +76,10 @@ class ActorController extends Controller
 
     public function countActors()
     {
-        $actors = ActorController::readActors();
-        $totalActors = count($actors);
+        // $actors = ActorController::readActors();
+        // $totalActors = count($actors);
+
+        $totalActors = Actor::count();
 
         return view("actors.count", ["totalActors" => $totalActors]);
     }
@@ -87,13 +90,27 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
+
+    // public function deleteActor($id)
+    // {
+    //     $delete =  DB::table('actors')->where('id', $id)->delete();
+    //     if ($delete) {
+    //         return response()->json(['action' => $delete, "status" => "true"]);
+    //     } else {
+    //         return response()->json(['action' => $delete, "status" => "false"]);
+    //     }
+    // }
+
+
     public function deleteActor($id)
     {
-        $delete =  DB::table('actors')->where('id', $id)->delete();
-        if ($delete) {
-            return response()->json(['action' => $delete, "status" => "true"]);
+        $actor = Actor::find($id);
+
+        if ($actor) {
+            $actor->delete();
+            return response()->json(['action' => 'delete', 'status' => true]);
         } else {
-            return response()->json(['action' => $delete, "status" => "false"]);
+            return response()->json(['action' => 'delete', 'status' => false]);
         }
     }
 
