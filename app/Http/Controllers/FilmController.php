@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use App\Models\Film;
+
 class FilmController extends Controller
 {
 
@@ -15,7 +17,8 @@ class FilmController extends Controller
     public static function readFilms(): array
     {
         $filmsJSON = Storage::json('/public/films.json');
-        $filmsDB = json_decode(json_encode(DB::table('films')->get()), true);
+        //$filmsDB = json_decode(json_encode(DB::table('films')->get()), true);
+        $filmsDB = json_decode(json_encode(Film::all()), true);
         $allFilms = array_merge($filmsJSON, $filmsDB);
         //dd($allFilms);
 
@@ -87,10 +90,16 @@ class FilmController extends Controller
 
         return view("films.list", ["films" => $films, "title" => $title]);
     }
+    // public function countFilms()
+    // {
+    //     $films = FilmController::readFilms();
+    //     $totalFilms = count($films);
+
+    //     return view("films.count", ["totalFilms" => $totalFilms]);
+    // }
     public function countFilms()
     {
-        $films = FilmController::readFilms();
-        $totalFilms = count($films);
+        $totalFilms = Film::count();
 
         return view("films.count", ["totalFilms" => $totalFilms]);
     }
@@ -109,7 +118,8 @@ class FilmController extends Controller
                 $films = json_encode($films);
                 Storage::put('/public/films.json', $films);
             } else {
-                DB::table('films')->insert($film);
+                //DB::table('films')->insert($film);
+                Film::insert($film);
             }
             return FilmController::listFilms();
         } else {
